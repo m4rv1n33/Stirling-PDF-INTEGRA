@@ -176,14 +176,7 @@
 }
 
 .iconLabel {
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
@@ -278,14 +271,7 @@
 
 /* Title styles */
 .titleText {
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: var(--font-sans);
   font-weight: 600;
   font-size: 22px;
   color: var(--c-text);
@@ -293,14 +279,7 @@
 
 /* Body text styles */
 .bodyText {
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: var(--font-sans);
   font-size: 16px;
   color: var(--c-text-muted);
   line-height: 1.5;

@@ -6,7 +6,8 @@ import { Button, type ButtonAccent } from "@app/ui/Button";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import LocalIcon from "@app/components/shared/LocalIcon";
 import { Z_INDEX_ONBOARDING_CARD } from "@app/styles/zIndex";
-import stirlingMark from "@app/assets/brand/modern-logo/logo512.png";
+import brandMark from "@app/assets/brand/modern-logo/logo512.png";
+import { useAppName } from "@app/hooks/useAppName";
 import styles from "@app/components/onboarding/InitialOnboardingModal/InitialOnboardingModal.module.css";
 
 /** A footer button. `action` is an opaque string handled by the caller. */
@@ -49,7 +50,7 @@ export interface OnboardingSlideShellProps {
 }
 
 /**
- * Hero art for the inset panel. `appIcon` renders the Stirling app mark
+ * Hero art for the inset panel. `appIcon` renders the app mark
  * directly; otherwise the children glyph sits inside a soft white tile.
  */
 export function ShellHero({
@@ -59,10 +60,9 @@ export function ShellHero({
   appIcon?: boolean;
   children?: ReactNode;
 }) {
+  const appName = useAppName();
   if (appIcon) {
-    return (
-      <img src={stirlingMark} alt="Stirling" className={styles.heroAppIcon} />
-    );
+    return <img src={brandMark} alt={appName} className={styles.heroAppIcon} />;
   }
   return <div className={styles.heroTile}>{children}</div>;
 }
@@ -90,6 +90,7 @@ export default function OnboardingSlideShell({
   zIndex = Z_INDEX_ONBOARDING_CARD,
 }: OnboardingSlideShellProps) {
   const { t } = useTranslation();
+  const appName = useAppName();
   const showProgress = stepCount > 1;
 
   // Back/icon buttons anchor the left; text actions cluster on the right.
@@ -146,12 +147,12 @@ export default function OnboardingSlideShell({
             <header className={styles.header}>
               <div className={styles.brand}>
                 <img
-                  src={stirlingMark}
+                  src={brandMark}
                   alt=""
                   aria-hidden="true"
                   className={styles.brandLogo}
                 />
-                <span className={styles.wordmark}>Stirling</span>
+                <span className={styles.wordmark}>{appName}</span>
               </div>
               <div className={styles.headerRight}>
                 {showProgress && (

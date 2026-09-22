@@ -38,11 +38,7 @@ const AddFileCard = () => {
     >
       <div className={styles.addFileContent}>
         <Group gap="xs" align="center">
-          <Wordmark
-            alt="Stirling PDF"
-            muted
-            style={{ height: "2.2rem", width: "auto" }}
-          />
+          <Wordmark muted size="1.5rem" />
         </Group>
 
         <Button

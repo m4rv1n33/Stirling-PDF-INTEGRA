@@ -3,7 +3,6 @@ import {
   useCallback,
   useContext,
   useMemo,
-  useState,
   ReactNode,
 } from "react";
 import { MantineProvider } from "@mantine/core";
@@ -16,14 +15,13 @@ import {
 import { ToastProvider } from "@app/components/toast";
 import ToastRenderer from "@app/components/toast/ToastRenderer";
 import { ToastPortalBinder } from "@app/components/toast";
-import {
-  type ThemeMode,
-  getSystemTheme,
-  resolveColorScheme,
-} from "@app/constants/theme";
+import { type ColorScheme, type ThemeMode } from "@app/constants/theme";
 // SUI shared design-system tokens (used by @app/ui); key on `data-theme`.
 import "@app/tokens/tokens.css";
 import "@app/theme/index.css";
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
 
 interface ThemeContextType {
   themeMode: ThemeMode;
@@ -45,7 +43,7 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  // preferences.theme is the single source of truth.
+  // preferences.theme is still stored and exposed, but no longer applied.
   const { preferences, updatePreference } = usePreferences();
   const themeMode = preferences.theme;
   const setTheme = useCallback(
@@ -53,31 +51,13 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     [updatePreference],
   );
 
-  // Track the OS scheme so "system" updates live; only subscribe while on system.
-  // If matchMedia is unavailable we bail out and keep the seeded value, which
-  // getSystemTheme already defaults to light — so it never crashes.
-  const [systemScheme, setSystemScheme] = useState(getSystemTheme);
-  useIsomorphicEffect(() => {
-    if (themeMode !== "system") return;
-    if (
-      typeof window === "undefined" ||
-      typeof window.matchMedia !== "function"
-    ) {
-      return;
-    }
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const update = () => setSystemScheme(media.matches ? "dark" : "light");
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, [themeMode]);
+  // INTEGRA renders in one look: dark, whatever the stored preference or the
+  // visitor's prefers-color-scheme says. Must match the pre-paint script in
+  // index.html.
+  const colorScheme: ColorScheme = "dark";
 
-  // The mode resolved to a concrete light/dark base.
-  const colorScheme = resolveColorScheme(themeMode, systemScheme);
-
-  // Mirror the scheme to <html>. The accent is fixed to the default (neutral
-  // surfaces + blue buttons): data-accent="default" and no --user-* overrides,
-  // so colors.css resolves --c-primary to its static blue fallback.
+  // Mirror the scheme to <html>. data-accent="default" with the dark scheme is
+  // the selector the INTEGRA block in colors.css keys on.
   useIsomorphicEffect(() => {
     const root = document.documentElement;
     root.setAttribute("data-theme", colorScheme);

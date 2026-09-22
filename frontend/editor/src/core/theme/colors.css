@@ -432,3 +432,107 @@ html[data-app-theme="custom"][data-accent="default"][data-mantine-color-scheme="
   --c-border: var(--p-c-28282d);
   --c-border-subtle: var(--p-zinc-700);
 }
+
+/* INTEGRA: the only look this instance renders. ThemeProvider pins the
+   scheme to dark, so this block always applies. It restates every token that
+   carries Stirling's blue or its own zinc steps, including the SUI and legacy
+   names from tokens.css and styles/theme.css, which it outranks on
+   specificity; that keeps the upstream blocks above untouched for merges.
+   Mapping from the INTEGRA stylesheets: --bg = --c-bg, --surface = the panel
+   surfaces, --hover = --c-hover and --c-surface-raised, --border and
+   --border-strong as named, --fg = --c-text, --muted = both muted text
+   steps. The extra [data-theme] keeps the selector distinct from the
+   default-dark block above and one step more specific. */
+html[data-app-theme="custom"][data-accent="default"][data-mantine-color-scheme="dark"][data-theme="dark"] {
+  --c-bg: var(--p-integra-bg);
+  --c-bg-raised: var(--p-integra-surface);
+  --c-surface: var(--p-integra-surface);
+  --c-surface-raised: var(--p-zinc-800);
+  --c-surface-sunken: var(--p-integra-bg);
+  --c-modal-surface: var(--p-integra-surface);
+  --c-input-bg: var(--p-integra-bg);
+  --c-hover: var(--p-zinc-800);
+  --c-active: var(--p-zinc-700);
+
+  --c-border: var(--p-zinc-700);
+  --c-border-subtle: var(--p-zinc-700);
+  --c-border-strong: var(--p-zinc-500);
+
+  --c-text: var(--p-zinc-100);
+  --c-text-muted: var(--p-zinc-200);
+  --c-text-subtle: var(--p-zinc-200);
+  --c-text-on-primary: var(--p-white);
+
+  /* Pressed segments in INTEGRA invert fg and bg. */
+  --c-btn-solid: var(--c-text);
+  --c-btn-inverse: var(--p-integra-bg);
+  --c-btn-secondary: var(--p-integra-surface);
+  --c-btn-secondary-border: var(--p-zinc-500);
+
+  --c-primary: var(--p-integra-red);
+  --c-primary-hover: color-mix(
+    in srgb,
+    var(--p-integra-red) 85%,
+    var(--p-black)
+  );
+  --c-primary-subtle: color-mix(in srgb, var(--p-integra-red) 15%, transparent);
+  /* #eb0000 reads at about 4.3:1 on the canvas, under the 4.5:1 text floor,
+     so accent copy takes a lighter step of the same hue (about 5:1 on the
+     raised surfaces). Fills keep the pure red, which carries a white label at
+     4.6:1. */
+  --c-accent-text: color-mix(in srgb, var(--p-integra-red) 70%, var(--p-white));
+  --c-accent-fg: var(--c-accent-text);
+  --c-accent-solid: var(--p-integra-red);
+  --c-accent-on-light: var(--p-integra-red);
+  --c-tab-active-tint: var(--p-integra-red);
+
+  --c-success: var(--p-green-600);
+  --c-warning: var(--p-amber-600);
+
+  --c-brand: var(--p-integra-red);
+  --c-brand-hover: var(--c-primary-hover);
+  --c-brand-mark: var(--p-integra-red);
+  --c-brand-mark-soft: var(--p-integra-red);
+  --c-conn-accent: var(--p-integra-red);
+
+  --c-floating-menu-bg: var(--p-zinc-800);
+  --c-floating-menu-text: var(--p-zinc-100);
+  --c-file-header-resting: var(--p-zinc-800);
+  --c-onboarding-hero: linear-gradient(
+    155deg,
+    var(--p-zinc-800) 0%,
+    var(--p-integra-surface) 100%
+  );
+  --c-onboarding-hero-tile: var(--p-integra-bg);
+
+  /* SUI names (tokens.css): the "blue" and "purple" slots are its accent. */
+  --color-blue: var(--c-primary);
+  --color-blue-light: color-mix(in srgb, var(--c-primary) 15%, var(--c-bg));
+  --color-blue-border: color-mix(in srgb, var(--c-primary) 40%, var(--c-bg));
+  --color-blue-dark: var(--c-accent-text);
+  --color-purple: var(--c-primary);
+  --color-purple-light: color-mix(in srgb, var(--c-primary) 15%, var(--c-bg));
+  --color-purple-border: color-mix(in srgb, var(--c-primary) 40%, var(--c-bg));
+  --color-purple-dark: var(--c-accent-text);
+  --grad-blue-btn: linear-gradient(
+    180deg,
+    var(--c-primary) 0%,
+    var(--c-primary-hover) 100%
+  );
+  --color-tooltip-text: var(--p-integra-bg);
+  --color-bg-code: var(--p-integra-surface);
+
+  /* Legacy names (styles/theme.css). */
+  --text-brand-accent: var(--c-accent-text);
+  --information-text-color: var(--c-accent-text);
+  --header-selected-bg: var(--c-primary);
+  --modal-nav-bg: var(--c-bg-raised);
+  --modal-content-bg: var(--c-surface);
+  --modal-nav-item-active: var(--c-accent-text);
+  --link-hover-bg: color-mix(in srgb, var(--c-primary) 14%, transparent);
+  --link-hover-border: color-mix(in srgb, var(--c-primary) 38%, transparent);
+  --link-focus-ring: color-mix(in srgb, var(--c-primary) 30%, transparent);
+  --link-toolbar-bg: color-mix(in srgb, var(--p-zinc-800) 94%, transparent);
+
+  color-scheme: dark;
+}

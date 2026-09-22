@@ -43,7 +43,6 @@
   color: inherit;
 }
 
-/* Taller than wide (71x79), so height drives the width. */
 .quick-nav-rail-item .sui-brandmark {
   width: auto;
   height: 1.125rem;

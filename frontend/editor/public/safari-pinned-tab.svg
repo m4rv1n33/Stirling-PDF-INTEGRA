@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <path d="M79 256L309 66V242L79 432V256Z" fill="#000000"/>
-  <path d="M202 268L432 78V255L202 445V268Z" fill="#000000" fill-opacity="0.55"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- mask-icon: one flat silhouette, coloured by the link tag. -->
+  <rect x="27" y="24" width="10" height="26" rx="5"/>
+  <circle cx="32" cy="15" r="6"/>
 </svg>

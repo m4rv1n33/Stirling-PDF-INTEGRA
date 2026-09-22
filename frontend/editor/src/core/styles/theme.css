@@ -337,22 +337,24 @@
 }
 
 [data-mantine-color-scheme="dark"] {
-  /* Inverted dark gray scale — RGB channels for Tailwind's rgb(var(--gray-N)). */
-  --gray-50: 15 15 16; /* zinc-950 */
-  --gray-100: 16 16 18; /* zinc-900 */
-  --gray-200: 24 24 27; /* zinc-800 */
-  --gray-300: 42 42 46; /* zinc-650 */
-  --gray-400: 63 63 70; /* zinc-500 */
-  --gray-500: 82 82 91; /* zinc-400 */
-  --gray-600: 113 113 122; /* zinc-300 */
-  --gray-700: 161 161 170; /* zinc-200 */
-  --gray-800: 212 212 216;
-  --gray-900: 244 244 245; /* zinc-100 */
+  /* Inverted dark gray scale: RGB channels for Tailwind's rgb(var(--gray-N)).
+     The INTEGRA zinc ramp; must stay in sync with the INTEGRA block in
+     theme/colors.css. */
+  --gray-50: 9 9 11; /* #09090b */
+  --gray-100: 12 12 14; /* #0c0c0e */
+  --gray-200: 24 24 27; /* #18181b */
+  --gray-300: 39 39 42; /* #27272a */
+  --gray-400: 63 63 70; /* #3f3f46 */
+  --gray-500: 82 82 91; /* #52525b */
+  --gray-600: 113 113 122; /* #71717a */
+  --gray-700: 161 161 170; /* #a1a1aa */
+  --gray-800: 212 212 216; /* #d4d4d8 */
+  --gray-900: 244 244 245; /* #f4f4f5 */
 
   /* Dark semantic channels for Tailwind. */
-  --surface: 24 24 27; /* zinc-800 */
-  --background: 15 15 16; /* zinc-950 */
-  --border: 42 42 46; /* zinc-650 */
+  --surface: 12 12 14; /* #0c0c0e */
+  --background: 9 9 11; /* #09090b */
+  --border: 39 39 42; /* #27272a */
 
   /* Dark theme Mantine colors */
   --color-red-50: var(--p-zinc-775);
@@ -759,13 +761,7 @@
   border: none;
   background: transparent;
   color: rgba(255, 255, 255, 0.9);
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: var(--font-sans);
   font-size: 11.5px;
   font-weight: 500;
   letter-spacing: 0.01em;

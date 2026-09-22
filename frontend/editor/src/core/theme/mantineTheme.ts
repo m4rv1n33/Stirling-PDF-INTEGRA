@@ -74,16 +74,18 @@ const gray: MantineColorsTuple = [
   "var(--color-gray-900)",
 ];
 
-// Neutral dark scale (zinc, mirroring --p-zinc-*) replacing Mantine's default gray ramp; colors.css re-points dark-4..7 at the --c-* surfaces. 0..3 text, 4..7 surfaces, 8..9 deepest.
+// The INTEGRA zinc ramp replacing Mantine's default dark scale; colors.css
+// re-points dark-4..7 at the --c-* surfaces. 0..3 text, 4..7 surfaces, 8..9
+// deepest.
 const dark: MantineColorsTuple = [
-  "#f4f4f5", // dark-0  — primary text on dark bg (zinc-100)
-  "#a1a1aa", // dark-1  — secondary text (zinc-200)
-  "#71717a", // dark-2  — muted text / icons (zinc-300)
-  "#52525b", // dark-3  — subtle text / dividers (zinc-400)
-  "#2a2a2e", // dark-4  — elevated surface / selected bg (zinc-650)
-  "#202023", // dark-5  — card / panel surface (zinc-775)
-  "#18181b", // dark-6  — toolbar / sidebar bg (zinc-800)
-  "#0f0f10", // dark-7  — page background (zinc-950)
+  "#f4f4f5", // dark-0: primary text
+  "#a1a1aa", // dark-1: muted text
+  "#71717a", // dark-2: icons
+  "#52525b", // dark-3: dividers
+  "#3f3f46", // dark-4: strong border
+  "#27272a", // dark-5: border / active
+  "#18181b", // dark-6: hover / raised surface
+  "#09090b", // dark-7: page background
   "#070708", // dark-8  — deeper than the reachable surfaces
   "#050506", // dark-9  — deepest
 ];
@@ -169,6 +171,9 @@ export const editorCssVariablesResolver: CSSVariablesResolver = () => ({
 export const mantineTheme = createTheme({
   // Primary color
   primaryColor: "primary",
+  fontFamily: "var(--font-sans)",
+  fontFamilyMonospace: "var(--font-mono)",
+  headings: { fontFamily: "var(--font-sans)" },
 
   // Color palette
   colors: {
@@ -215,7 +220,8 @@ export const mantineTheme = createTheme({
   other: {
     crop: {
       overlayBorder: "var(--color-primary-500)",
-      overlayBackground: "rgba(59, 130, 246, 0.1)", // Blue with 10% opacity
+      overlayBackground:
+        "color-mix(in srgb, var(--c-primary) 10%, transparent)",
       handleColor: "var(--color-primary-500)",
       handleBorder: "var(--c-surface)",
     },

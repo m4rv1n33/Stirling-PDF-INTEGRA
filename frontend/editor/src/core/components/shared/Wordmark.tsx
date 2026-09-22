@@ -1,20 +1,28 @@
-import React from "react";
-import { useMantineColorScheme } from "@mantine/core";
-import { useLogoAssets } from "@app/hooks/useLogoAssets";
+import type { CSSProperties } from "react";
+import { Logo } from "@app/ui/Logo";
 
-interface WordmarkProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  alt?: string;
+interface WordmarkProps {
+  /** Font size of the name (CSS length). */
+  size?: string;
   muted?: boolean;
+  className?: string;
+  style?: CSSProperties;
 }
 
-export function Wordmark({ alt = "", muted = false, ...props }: WordmarkProps) {
-  const { colorScheme } = useMantineColorScheme();
-  const isDark = colorScheme === "dark";
-  const { wordmark } = useLogoAssets();
-
-  // light: black text (standard) or grey text (muted)
-  // dark:  white text for both variants
-  const src = isDark ? wordmark.white : muted ? wordmark.grey : wordmark.black;
-
-  return <img src={src} alt={alt} {...props} />;
+/** The app name on its own, as the lockup in @app/ui/Logo sets it. */
+export function Wordmark({
+  size,
+  muted = false,
+  className,
+  style,
+}: WordmarkProps) {
+  return (
+    <Logo
+      variant="textOnly"
+      textHeight={size}
+      muted={muted}
+      className={className}
+      style={style}
+    />
+  );
 }

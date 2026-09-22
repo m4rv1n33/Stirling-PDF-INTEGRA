@@ -15,6 +15,13 @@ vi.mock("@app/components/policies/usePoliciesEnabled", () => ({
   usePoliciesEnabled: automationEnabled,
 }));
 
+// The INTEGRA build always bypasses onboarding; the modal's own gating is
+// what is under test here, so the mock keeps the session-flag contract.
+vi.mock("@app/components/onboarding/useBypassOnboarding", () => ({
+  useBypassOnboarding: () =>
+    sessionStorage.getItem("onboarding::bypass-all") === "true",
+}));
+
 vi.mock("@app/services/authService", () => ({
   authService: { isAuthenticated },
 }));

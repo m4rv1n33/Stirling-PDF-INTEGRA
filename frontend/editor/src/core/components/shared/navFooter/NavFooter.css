@@ -97,17 +97,6 @@
   width: 1.625rem;
 }
 
-/* Hovering the switch row plays the mark's "thinking" drift once — the same
-   motion the chat FAB loops, for a single beat, as a hint that the row hands
-   off to the other app. One iteration only: it starts and ends at rest, so
-   nothing snaps when it finishes, and re-entering the row replays it. */
-.nav-footer__row:hover .sui-brandmark__a {
-  animation: sui-brandmark-drift-a 1.1s ease-in-out 1;
-}
-.nav-footer__row:hover .sui-brandmark__b {
-  animation: sui-brandmark-drift-b 1.1s ease-in-out 1;
-}
-
 .nav-footer__row-label {
   flex: 1;
   min-width: 0;

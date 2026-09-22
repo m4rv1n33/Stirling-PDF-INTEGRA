@@ -18,9 +18,7 @@ import { SegmentedControl } from "@app/ui/SegmentedControl";
 import { useTranslation } from "react-i18next";
 import { usePreferences } from "@app/contexts/PreferencesContext";
 import { useAppConfig } from "@app/contexts/AppConfigContext";
-import { useTheme } from "@app/components/shared/ThemeProvider";
 import LanguageSelector from "@app/components/shared/LanguageSelector";
-import { type ThemeMode } from "@app/constants/theme";
 import type { ToolPanelMode } from "@app/constants/toolPanel";
 import {
   type StartupView,
@@ -94,7 +92,6 @@ const GeneralSection: React.FC<GeneralSectionProps> = ({
   const autoUnzipLimitLabelId = `${labelIds}-auto-unzip-limit`;
   const { preferences, updatePreference } = usePreferences();
   const { config } = useAppConfig();
-  const { setTheme, themeMode } = useTheme();
   const [fileLimitInput, setFileLimitInput] = useState<number | string>(
     preferences.autoUnzipFileLimit,
   );
@@ -475,50 +472,6 @@ const GeneralSection: React.FC<GeneralSectionProps> = ({
           </Stack>
         </Paper>
       )}
-
-      {/* Appearance */}
-      <Paper withBorder p="md" radius="md">
-        <Stack gap="md">
-          <div
-            id="setting-theme"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <Text fw={500} size="sm">
-                {t("settings.general.theme", "Theme")}{" "}
-                <InfoTooltip
-                  label={t(
-                    "settings.general.themeDescription",
-                    "Choose light, dark, or follow your system so it switches automatically.",
-                  )}
-                />
-              </Text>
-            </div>
-            <SegmentedControl
-              value={themeMode}
-              onChange={(val) => setTheme(val as ThemeMode)}
-              options={[
-                {
-                  label: t("settings.general.themeLight", "Light"),
-                  value: "light",
-                },
-                {
-                  label: t("settings.general.themeDark", "Dark"),
-                  value: "dark",
-                },
-                {
-                  label: t("settings.general.themeSystem", "System"),
-                  value: "system",
-                },
-              ]}
-            />
-          </div>
-        </Stack>
-      </Paper>
 
       {/* Language */}
       <Paper withBorder p="md" radius="md">

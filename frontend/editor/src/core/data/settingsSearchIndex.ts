@@ -32,13 +32,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchEntry[] = [
   // --- General > Appearance ---
   {
     section: "general",
-    anchor: "setting-theme",
-    labelKey: "settings.general.theme",
-    labelFallback: "Theme",
-    keywords: ["dark", "light", "mode", "appearance", "colour", "color"],
-  },
-  {
-    section: "general",
     anchor: "setting-language",
     labelKey: "settings.general.language",
     labelFallback: "Language",

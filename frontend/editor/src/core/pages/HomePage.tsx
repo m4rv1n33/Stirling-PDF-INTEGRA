@@ -11,6 +11,7 @@ import { useToolWorkflow } from "@app/contexts/ToolWorkflowContext";
 import { Group } from "@mantine/core";
 import { useSidebarContext } from "@app/contexts/SidebarContext";
 import { useDocumentMeta } from "@app/hooks/useDocumentMeta";
+import { useAppName } from "@app/hooks/useAppName";
 import { getToolOgImage } from "@app/data/ogImage";
 import urlSeoOverrides from "@app/data/urlSeoOverrides.json";
 import { useBaseUrl } from "@app/hooks/useBaseUrl";
@@ -328,8 +329,6 @@ export default function HomePage() {
     )?.hideToolPanel ??
       false);
 
-  const brandAltText = t("home.mobile.brandAlt", "Stirling PDF logo");
-
   const quickNavToolReasons = useMemo(() => {
     const reasons: QuickNavToolReasons = {};
     for (const id of ["automate", "sharedSign"] as const) {
@@ -496,7 +495,7 @@ export default function HomePage() {
   // all share the one `convert` tool, so prefer a per-URL SEO override when the
   // path has one - this keeps the hydrated title/description matching the
   // keyword-targeted copy that crawlers see in the prerendered HTML.
-  const appName = config?.appNameNavbar || "Stirling PDF";
+  const appName = useAppName();
   // The override copy is English-only (it mirrors the prerendered HTML), so
   // every other locale keeps its translated tool name and description.
   const isEnglish = (i18n.resolvedLanguage || i18n.language || "").startsWith(
@@ -565,8 +564,8 @@ export default function HomePage() {
             {navigationState.workbench !== "myFiles" && (
               <div className="mobile-toggle">
                 <div className="mobile-brand">
-                  <LogoIcon className="mobile-brand-icon" />
-                  <Wordmark alt={brandAltText} className="mobile-brand-text" />
+                  <LogoIcon alt="" className="mobile-brand-icon" />
+                  <Wordmark className="mobile-brand-text" />
                 </div>
                 <div
                   className="mobile-toggle-buttons"

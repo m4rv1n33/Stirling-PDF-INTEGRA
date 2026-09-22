@@ -1,14 +1,13 @@
 import React from "react";
-import { useMantineColorScheme } from "@mantine/core";
-import { useLogoPath } from "@app/hooks/useLogoPath";
+import { useAppName } from "@app/hooks/useAppName";
+import markUrl from "@app/assets/brand/modern-logo/favicon.svg";
 
 interface LogoIconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   alt?: string;
 }
 
-export function LogoIcon({ alt = "", ...props }: LogoIconProps) {
-  const { colorScheme } = useMantineColorScheme();
-  const logoPaths = useLogoPath();
-  const src = colorScheme === "dark" ? logoPaths.dark : logoPaths.light;
-  return <img src={src} alt={alt} {...props} />;
+/** The INTEGRA mark as an image; the same asset in either colour scheme. */
+export function LogoIcon({ alt, ...props }: LogoIconProps) {
+  const appName = useAppName();
+  return <img src={markUrl} alt={alt ?? appName} {...props} />;
 }

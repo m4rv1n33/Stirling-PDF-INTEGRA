@@ -19,6 +19,8 @@ describe("useLogoAssets - Logo Asset Files", () => {
     "logo-tooltip.svg",
     "Firstpage.png",
     "favicon.ico",
+    "favicon.svg",
+    "apple-touch-icon.png",
     "logo192.png",
     "logo512.png",
     "StirlingPDFLogoWhiteText.svg",

@@ -45,12 +45,14 @@
   /* --shadow-* is intentionally NOT defined here: editor (drop shadows) and SUI/portal (inset hairlines) reuse the name with different values. */
 
   /* ── Typography ── */
+  /* The INTEGRA type pair, bundled by ThemeProvider. "Inter Variable" is the
+     family the bundled variable font registers under; "Inter" follows it so a
+     locally installed static Inter still matches. */
   --font-sans:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system,
     sans-serif;
-  --font-mono:
-    "SF Mono", "Fira Code", Menlo, Consolas, "DejaVu Sans Mono", monospace;
-  --font-brand: "Alumni Sans", "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-brand: var(--font-sans);
 
   --font-weight-medium: 500;
   --font-weight-semibold: 600;

@@ -231,8 +231,8 @@ export default function MobileSignPage() {
 
   const header = (
     <Group justify="center" gap="xs" py="md">
-      <LogoIcon style={{ width: 28, height: 28 }} />
-      <Wordmark style={{ height: 18 }} />
+      <LogoIcon alt="" style={{ width: 28, height: 28 }} />
+      <Wordmark size="18px" />
     </Group>
   );
 

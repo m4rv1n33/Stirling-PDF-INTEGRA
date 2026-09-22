@@ -3,46 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <base href="%BASE_URL%" />
-    <link rel="icon" href="modern-logo/favicon.ico" />
+    <link rel="icon" href="modern-logo/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="modern-logo/favicon.svg" type="image/svg+xml" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#09090b" />
+    <meta name="color-scheme" content="dark" />
     <meta
       name="description"
       content="A free, private PDF editor you can run on any infrastructure."
     />
-    <link rel="apple-touch-icon" href="modern-logo/logo192.png" />
+    <link rel="apple-touch-icon" href="modern-logo/apple-touch-icon.png" />
     <link rel="manifest" href="manifest.json" />
 
-    <title>Stirling PDF - 30M+ Downloads</title>
+    <title>INTEGRA PDF</title>
 
-    <!-- Apply theme before first paint (no FOUC); mirrors ThemeProvider, which then refines it. -->
+    <!-- Apply the theme before first paint (no FOUC). INTEGRA is always dark;
+         must match ThemeProvider. -->
     <script>
       (function () {
-        try {
-          var p = JSON.parse(
-            localStorage.getItem("stirlingpdf_preferences") || "{}",
-          );
-          var mode = p.theme || "system";
-          var scheme =
-            mode === "light"
-              ? "light"
-              : mode === "dark"
-                ? "dark"
-                : window.matchMedia &&
-                    window.matchMedia("(prefers-color-scheme: dark)").matches
-                  ? "dark"
-                  : "light";
-          var r = document.documentElement;
-          r.setAttribute("data-theme", scheme);
-          r.setAttribute("data-app-theme", "custom");
-          r.setAttribute("data-accent", "default");
-          r.setAttribute("data-mantine-color-scheme", scheme);
-        } catch (e) {
-          /* first visit / unavailable storage: ThemeProvider handles it */
-        }
+        var r = document.documentElement;
+        r.setAttribute("data-theme", "dark");
+        r.setAttribute("data-app-theme", "custom");
+        r.setAttribute("data-accent", "default");
+        r.setAttribute("data-mantine-color-scheme", "dark");
       })();
     </script>
   </head>
