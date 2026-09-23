@@ -185,29 +185,24 @@ describe("useSuperSearch helpers", () => {
     expect(rankSettingsResults("team", t, null, vi.fn())).toEqual([]);
   });
 
-  it("respects showSettingsWhenNoLogin for the no-login admin preview", () => {
+  it("shows admin sections only to signed-in admins", () => {
     const noLoginGates = { isAdmin: false, loginEnabled: false };
 
-    // Default (flag unset / true): no-login mode keeps the admin preview.
-    const shown = rankSettingsResults("admin", t, noLoginGates, vi.fn());
-    expect(shown.map((result) => result.key)).toEqual([
-      "setting-section:admin",
-    ]);
+    // No preview without login, even when the server still asks for one.
+    for (const showSettingsWhenNoLogin of [undefined, true, false]) {
+      const hidden = rankSettingsResults(
+        "admin",
+        t,
+        { ...noLoginGates, showSettingsWhenNoLogin },
+        vi.fn(),
+      );
+      expect(hidden).toEqual([]);
+    }
 
-    // Flag off: the modal hides admin sections, so search must too.
-    const hidden = rankSettingsResults(
-      "admin",
-      t,
-      { ...noLoginGates, showSettingsWhenNoLogin: false },
-      vi.fn(),
-    );
-    expect(hidden).toEqual([]);
-
-    // Admins keep admin sections regardless of the flag.
     const admin = rankSettingsResults(
       "admin",
       t,
-      { isAdmin: true, loginEnabled: true, showSettingsWhenNoLogin: false },
+      { isAdmin: true, loginEnabled: true },
       vi.fn(),
     );
     expect(admin.map((result) => result.key)).toEqual([

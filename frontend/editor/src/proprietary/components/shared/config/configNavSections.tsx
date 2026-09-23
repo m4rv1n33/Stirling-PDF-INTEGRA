@@ -50,15 +50,15 @@ import ApiKeys from "@app/components/shared/config/configSections/ApiKeys";
  * Self-hosted settings, grouped by who reaches for them and what they do there:
  * your own settings and keys, then the people and money of the workspace, then
  * what configures the server, then what only reports on it. Admin groups appear
- * for admins, and as a read-only preview when login is off and
- * system.showSettingsWhenNoLogin allows it.
+ * for admins only: with login off every admin page is unusable, so they are not
+ * shown at all, whatever system.showSettingsWhenNoLogin says.
  */
 export const useConfigNavSections = (
   isAdmin: boolean = false,
   runningEE: boolean = false,
   loginEnabled: boolean = false,
   onRequestClose: () => void = () => {},
-  showSettingsWhenNoLogin: boolean = true,
+  _showSettingsWhenNoLogin: boolean = true,
 ): ConfigNavSection[] => {
   const { t } = useTranslation();
 
@@ -68,7 +68,7 @@ export const useConfigNavSections = (
     runningEE,
     loginEnabled,
     onRequestClose,
-    showSettingsWhenNoLogin,
+    false,
   );
   const about = coreSections.filter((s) => s.id === "about");
   const sections = coreSections.filter((s) => s.id !== "about");
@@ -104,16 +104,7 @@ export const useConfigNavSections = (
     }
   }
 
-  const showAdmin = isAdmin || (!loginEnabled && showSettingsWhenNoLogin);
-  const requiresLogin = !loginEnabled;
-  const enableLoginTooltip = t(
-    "settings.tooltips.enableLoginFirst",
-    "Enable login mode first",
-  );
-  const gated = {
-    disabled: requiresLogin,
-    disabledTooltip: requiresLogin ? enableLoginTooltip : undefined,
-  };
+  const showAdmin = isAdmin && loginEnabled;
 
   if (showAdmin) {
     sections.push({
@@ -129,7 +120,6 @@ export const useConfigNavSections = (
           ),
           icon: "group-rounded",
           component: <PeopleSection />,
-          ...gated,
         },
         {
           key: "teams",
@@ -140,7 +130,6 @@ export const useConfigNavSections = (
           ),
           icon: "groups-rounded",
           component: <TeamsSection />,
-          ...gated,
         },
         {
           key: "adminPlan",
@@ -151,7 +140,6 @@ export const useConfigNavSections = (
           ),
           icon: "star-rounded",
           component: <AdminPlanSection />,
-          ...gated,
         },
       ],
     });
@@ -176,7 +164,6 @@ export const useConfigNavSections = (
                 <AdminSystemSection />
               </Suspense>
             ),
-            ...gated,
           },
           {
             key: "adminSecurity",
@@ -191,7 +178,6 @@ export const useConfigNavSections = (
                 <AdminSecurityPage />
               </Suspense>
             ),
-            ...gated,
           },
           {
             key: "adminConnections",
@@ -206,7 +192,6 @@ export const useConfigNavSections = (
                 <AdminIntegrationsPage />
               </Suspense>
             ),
-            ...gated,
           },
           {
             key: "adminAi",
@@ -221,7 +206,6 @@ export const useConfigNavSections = (
                 <AdminAiSection />
               </Suspense>
             ),
-            ...gated,
           },
           {
             key: "adminDatabase",
@@ -236,7 +220,6 @@ export const useConfigNavSections = (
                 <AdminDatabasePage />
               </Suspense>
             ),
-            ...gated,
           },
           {
             key: "adminAdvanced",
@@ -251,7 +234,6 @@ export const useConfigNavSections = (
                 <AdminAdvancedPage />
               </Suspense>
             ),
-            ...gated,
           },
           {
             key: "adminLegal",
@@ -266,7 +248,6 @@ export const useConfigNavSections = (
                 <AdminLegalPrivacyPage />
               </Suspense>
             ),
-            ...gated,
           },
         ],
       },
@@ -284,7 +265,6 @@ export const useConfigNavSections = (
             ),
             icon: "monitoring",
             component: <AdminUsageSection />,
-            ...gated,
           },
           {
             key: "adminAudit",
@@ -295,7 +275,6 @@ export const useConfigNavSections = (
             ),
             icon: "fact-check-rounded",
             component: <AdminAuditSection />,
-            ...gated,
           },
         ],
       },

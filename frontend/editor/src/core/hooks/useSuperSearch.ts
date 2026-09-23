@@ -318,12 +318,8 @@ export function rankSettingsResults(
     // (account, API keys) have no meaning. Actual per-session auth state only
     // matters on SaaS, where requiresAccount/isAnonymous carries it.
     if (s.requiresLogin && !(gates?.loginEnabled ?? false)) return false;
-    // Admin-area sections mirror the builder's gate: admins always; no-login
-    // mode only while system.showSettingsWhenNoLogin keeps the admin preview.
-    const adminGateOpen =
-      !!gates &&
-      (gates.isAdmin ||
-        (!gates.loginEnabled && (gates.showSettingsWhenNoLogin ?? true)));
+    // Admin-area sections mirror the builder's gate: signed-in admins only.
+    const adminGateOpen = !!gates && gates.isAdmin && gates.loginEnabled;
     if (s.adminArea && !adminGateOpen) return false;
     // Account-bound sections mirror the SaaS builder's `!isAnonymous` gate.
     if (s.requiresAccount && (gates ? (gates.isAnonymous ?? false) : true))
