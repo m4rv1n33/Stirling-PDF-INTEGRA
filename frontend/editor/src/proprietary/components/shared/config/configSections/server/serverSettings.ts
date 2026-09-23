@@ -50,12 +50,6 @@ export interface GeneralSettingsData {
   };
 }
 
-/** The `ui` section's user-preference defaults, saved on their own key. */
-export interface UiDefaultsSettingsData {
-  defaultHideUnavailableTools?: boolean;
-  defaultHideUnavailableConversions?: boolean;
-}
-
 export interface EndpointsSettingsData {
   toRemove?: string[];
   groupsToRemove?: string[];

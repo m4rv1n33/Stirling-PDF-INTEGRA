@@ -10,7 +10,6 @@ import {
   getAvailableToExtensions as defaultGetAvailableToExtensions,
 } from "@app/utils/convertUtils";
 import { getConversionEndpoints } from "@app/data/toolsTaxonomy";
-import { usePreferences } from "@app/contexts/PreferencesContext";
 import { useConversionCloudStatus } from "@app/hooks/useConversionCloudStatus";
 import GroupedFormatDropdown from "@app/components/tools/convert/GroupedFormatDropdown";
 import ConvertToImageSettings from "@app/components/tools/convert/ConvertToImageSettings";
@@ -66,7 +65,6 @@ const ConvertSettings = ({
 }: ConvertSettingsProps) => {
   const { t } = useTranslation();
   const theme = useMantineTheme();
-  const { preferences } = usePreferences();
 
   const allEndpoints = useMemo(() => {
     const endpoints = getConversionEndpoints(EXTENSION_TO_ENDPOINT);
@@ -114,11 +112,7 @@ const ConvertSettings = ({
       };
     });
 
-    // Filter out unavailable source formats if preference is enabled
-    let filteredOptions = baseOptions;
-    if (preferences.hideUnavailableConversions) {
-      filteredOptions = baseOptions.filter((opt) => opt.enabled !== false);
-    }
+    const filteredOptions = baseOptions.filter((opt) => opt.enabled !== false);
 
     // Add dynamic format option if current selection is a file-<extension> format
     if (
@@ -138,12 +132,7 @@ const ConvertSettings = ({
     }
 
     return filteredOptions;
-  }, [
-    parameters.fromExtension,
-    endpointStatus,
-    preferences.hideUnavailableConversions,
-    conversionStatus,
-  ]);
+  }, [parameters.fromExtension, endpointStatus, conversionStatus]);
 
   // Enhanced TO options with endpoint availability and cloud status
   const enhancedToOptions = useMemo(() => {
@@ -167,18 +156,8 @@ const ConvertSettings = ({
       };
     });
 
-    // Filter out unavailable conversions if preference is enabled
-    if (preferences.hideUnavailableConversions) {
-      return enhanced.filter((opt) => opt.enabled !== false);
-    }
-
-    return enhanced;
-  }, [
-    parameters.fromExtension,
-    endpointStatus,
-    preferences.hideUnavailableConversions,
-    conversionStatus,
-  ]);
+    return enhanced.filter((opt) => opt.enabled !== false);
+  }, [parameters.fromExtension, endpointStatus, conversionStatus]);
 
   const resetParametersToDefaults = () => {
     onParameterChange("imageOptions", {

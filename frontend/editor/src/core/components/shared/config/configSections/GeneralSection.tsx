@@ -85,8 +85,6 @@ const GeneralSection: React.FC<GeneralSectionProps> = ({
   const labelIds = useId();
   const updateModeLabelId = `${labelIds}-update-mode`;
   const viewerZoomLabelId = `${labelIds}-viewer-zoom`;
-  const hideToolsLabelId = `${labelIds}-hide-tools`;
-  const hideConversionsLabelId = `${labelIds}-hide-conversions`;
   const autoUnzipLabelId = `${labelIds}-auto-unzip`;
   const autoUnzipLimitLabelId = `${labelIds}-auto-unzip-limit`;
   const { preferences, updatePreference } = usePreferences();
@@ -613,73 +611,6 @@ const GeneralSection: React.FC<GeneralSectionProps> = ({
               }}
             />
           </div>
-          <div
-            id="setting-hide-unavailable-tools"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <Text id={hideToolsLabelId} fw={500} size="sm">
-                {t(
-                  "settings.general.hideUnavailableTools",
-                  "Hide unavailable tools",
-                )}{" "}
-                <InfoTooltip
-                  label={t(
-                    "settings.general.hideUnavailableToolsDescription",
-                    "Remove tools that have been disabled by your server instead of showing them greyed out.",
-                  )}
-                />
-              </Text>
-            </div>
-            <Switch
-              aria-labelledby={hideToolsLabelId}
-              checked={preferences.hideUnavailableTools}
-              onChange={(event) =>
-                updatePreference(
-                  "hideUnavailableTools",
-                  event.currentTarget.checked,
-                )
-              }
-            />
-          </div>
-          <div
-            id="setting-hide-unavailable-conversions"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <Text id={hideConversionsLabelId} fw={500} size="sm">
-                {t(
-                  "settings.general.hideUnavailableConversions",
-                  "Hide unavailable conversions",
-                )}{" "}
-                <InfoTooltip
-                  label={t(
-                    "settings.general.hideUnavailableConversionsDescription",
-                    "Remove disabled conversion options in the Convert tool instead of showing them greyed out.",
-                  )}
-                />
-              </Text>
-            </div>
-            <Switch
-              aria-labelledby={hideConversionsLabelId}
-              checked={preferences.hideUnavailableConversions}
-              onChange={(event) =>
-                updatePreference(
-                  "hideUnavailableConversions",
-                  event.currentTarget.checked,
-                )
-              }
-            />
-          </div>
-
           <div
             id="setting-auto-unzip"
             style={{

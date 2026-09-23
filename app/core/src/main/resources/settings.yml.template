@@ -315,8 +315,8 @@ autoPipeline:
 ui:
   appNameNavbar: "INTEGRA PDF" # custom app/brand name, shown as the browser tab title, beside the logo and as the TOTP/2FA issuer label in authenticator apps. Empty falls back to "INTEGRA PDF" in the UI
   languages: [] # Ignored by the web UI, which is fixed to en-US.
-  defaultHideUnavailableTools: false # Default user preference: hide disabled tools instead of greying them out
-  defaultHideUnavailableConversions: false # Default user preference: hide disabled conversion options instead of greying them out
+  defaultHideUnavailableTools: false # Ignored: the web UI always hides tools this server cannot run
+  defaultHideUnavailableConversions: false # Ignored: the web UI always hides conversions this server cannot run
   hideDisabledTools:
     googleDrive: false # Hide Google Drive button when not enabled
     mobileQRScanner: false # Hide mobile QR scanner button when not enabled

@@ -4,7 +4,6 @@ import type {
   GeneralSettingsData,
   McpSettingsData,
   StorageSharingSettingsData,
-  UiDefaultsSettingsData,
 } from "@app/components/shared/config/configSections/server/serverSettings";
 
 /**
@@ -22,7 +21,6 @@ export interface ServerCardProps<T> {
 }
 
 export type GeneralCardProps = ServerCardProps<GeneralSettingsData>;
-export type UiDefaultsCardProps = ServerCardProps<UiDefaultsSettingsData>;
 export type EndpointsCardProps = ServerCardProps<EndpointsSettingsData>;
 export type StorageSharingCardProps =
   ServerCardProps<StorageSharingSettingsData>;

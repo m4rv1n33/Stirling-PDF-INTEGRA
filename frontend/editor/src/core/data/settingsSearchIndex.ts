@@ -54,20 +54,6 @@ export const SETTINGS_SEARCH_INDEX: SettingsSearchEntry[] = [
   },
   {
     section: "general",
-    anchor: "setting-hide-unavailable-tools",
-    labelKey: "settings.general.hideUnavailableTools",
-    labelFallback: "Hide unavailable tools",
-    keywords: ["disabled", "greyed", "tools"],
-  },
-  {
-    section: "general",
-    anchor: "setting-hide-unavailable-conversions",
-    labelKey: "settings.general.hideUnavailableConversions",
-    labelFallback: "Hide unavailable conversions",
-    keywords: ["disabled", "convert", "conversions"],
-  },
-  {
-    section: "general",
     anchor: "setting-auto-unzip",
     labelKey: "settings.general.autoUnzip",
     labelFallback: "Auto-unzip API responses",

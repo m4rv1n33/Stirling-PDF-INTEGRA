@@ -20,10 +20,8 @@ import type {
   FolderAccessSettingsData,
   GeneralSettingsData,
   StorageSharingSettingsData,
-  UiDefaultsSettingsData,
 } from "@app/components/shared/config/configSections/server/serverSettings";
 import { SystemCard } from "@app/components/shared/config/configSections/server/SystemCard";
-import { UserDefaultsCard } from "@app/components/shared/config/configSections/server/UserDefaultsCard";
 import { EndpointManagementCard } from "@app/components/shared/config/configSections/server/EndpointManagementCard";
 import { StorageSharingCard } from "@app/components/shared/config/configSections/server/StorageSharingCard";
 import { FolderAccessCard } from "@app/components/shared/config/configSections/server/FolderAccessCard";
@@ -34,13 +32,7 @@ import AdminFormDetectionSection from "@app/components/shared/config/configSecti
 import "@app/components/shared/config/configSections/server/AdminSystemSection.css";
 
 /** Every admin section this page drafts, and so every key a save invalidates. */
-const SECTION_NAMES = [
-  "general",
-  "ui",
-  "endpoints",
-  "storage",
-  "policies",
-] as const;
+const SECTION_NAMES = ["general", "endpoints", "storage", "policies"] as const;
 
 /**
  * The server settings, previously six nav rows. Six sections' drafts sit
@@ -224,18 +216,6 @@ export default function AdminSystemSection() {
   });
 
   const {
-    settings: uiDefaults,
-    setSettings: setUiDefaults,
-    loading: uiLoading,
-    saving: uiSaving,
-    saveSettings: saveUiDefaults,
-    isFieldPending: isUiFieldPending,
-  } = useAdminSettings<UiDefaultsSettingsData>({
-    sectionName: "ui",
-    enabled: loginEnabled,
-  });
-
-  const {
     settings: endpoints,
     setSettings: setEndpoints,
     loading: endpointsLoading,
@@ -307,16 +287,12 @@ export default function AdminSystemSection() {
   // settles: a composite draft always has keys, so this is the only guard left
   // between useSettingsDirty and a snapshot taken mid-fetch.
   const loading = loginEnabled
-    ? generalLoading ||
-      uiLoading ||
-      endpointsLoading ||
-      storageLoading ||
-      policiesLoading
+    ? generalLoading || endpointsLoading || storageLoading || policiesLoading
     : false;
 
   const composite = useMemo(
-    () => ({ general, uiDefaults, endpoints, storage, folderAccess }),
-    [general, uiDefaults, endpoints, storage, folderAccess],
+    () => ({ general, endpoints, storage, folderAccess }),
+    [general, endpoints, storage, folderAccess],
   );
 
   const { isDirty, resetToSnapshot, markSaved } = useSettingsDirty(
@@ -346,7 +322,6 @@ export default function AdminSystemSection() {
     const results: PromiseSettledResult<void>[] = [];
     for (const save of [
       saveGeneral,
-      saveUiDefaults,
       saveEndpoints,
       saveStorage,
       savePolicies,
@@ -384,19 +359,11 @@ export default function AdminSystemSection() {
   const handleDiscard = useCallback(() => {
     const original = resetToSnapshot();
     setGeneral(original.general);
-    setUiDefaults(original.uiDefaults);
     setEndpoints(original.endpoints);
     setStorage(original.storage);
     setFolderAccess(original.folderAccess);
     setNewRoot("");
-  }, [
-    resetToSnapshot,
-    setGeneral,
-    setUiDefaults,
-    setEndpoints,
-    setStorage,
-    setFolderAccess,
-  ]);
+  }, [resetToSnapshot, setGeneral, setEndpoints, setStorage, setFolderAccess]);
 
   if (loading) {
     return (
@@ -421,25 +388,6 @@ export default function AdminSystemSection() {
           title={t("admin.settings.general.branding", "Branding & appearance")}
         >
           <SystemCard {...generalCard} />
-        </SettingsCard>
-
-        <SettingsCard
-          id="adminUserDefaults"
-          title={t(
-            "admin.settings.endpoints.userDefaults",
-            "User Preference Defaults",
-          )}
-          description={t(
-            "admin.settings.endpoints.userDefaultsDescription",
-            "Set default values for user preferences. Users can override these in their personal settings.",
-          )}
-        >
-          <UserDefaultsCard
-            settings={uiDefaults}
-            setSettings={setUiDefaults}
-            isFieldPending={isUiFieldPending}
-            loginEnabled={loginEnabled}
-          />
         </SettingsCard>
 
         <SettingsCard
@@ -583,11 +531,7 @@ export default function AdminSystemSection() {
       <SettingsStickyFooter
         isDirty={isDirty}
         saving={
-          generalSaving ||
-          uiSaving ||
-          endpointsSaving ||
-          storageSaving ||
-          policiesSaving
+          generalSaving || endpointsSaving || storageSaving || policiesSaving
         }
         loginEnabled={loginEnabled}
         onSave={handleSave}

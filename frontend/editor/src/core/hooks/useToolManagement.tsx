@@ -1,6 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
 import { useToolRegistry } from "@app/contexts/ToolRegistryContext";
-import { usePreferences } from "@app/contexts/PreferencesContext";
 import {
   getAllEndpoints,
   isComingSoonTool,
@@ -41,7 +40,6 @@ export const useToolManagement = (): ToolManagementResult => {
 
   const { allTools } = useToolRegistry();
   const baseRegistry = allTools;
-  const { preferences } = usePreferences();
   const isSaaSMode = useSaaSMode();
 
   const allEndpoints = useMemo(
@@ -170,13 +168,14 @@ export const useToolManagement = (): ToolManagementResult => {
 
       const isComingSoon = isComingSoonTool(toolKey, baseTool);
 
-      if (preferences.hideUnavailableTools && (!isAvailable || isComingSoon)) {
+      // Never greyed out: a tool this server cannot run is not offered at all.
+      if (!isAvailable || isComingSoon) {
         return;
       }
       availableToolRegistry[toolKey] = baseTool;
     });
     return availableToolRegistry;
-  }, [baseRegistry, preferences.hideUnavailableTools, toolAvailability]);
+  }, [baseRegistry, toolAvailability]);
 
   const getSelectedTool = useCallback(
     (toolKey: ToolId | null): ToolRegistryEntry | null => {
