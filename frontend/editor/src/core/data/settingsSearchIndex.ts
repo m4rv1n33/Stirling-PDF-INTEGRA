@@ -30,13 +30,6 @@ export interface SettingsSearchEntry {
  */
 export const SETTINGS_SEARCH_INDEX: SettingsSearchEntry[] = [
   // --- General > Appearance ---
-  {
-    section: "general",
-    anchor: "setting-language",
-    labelKey: "settings.general.language",
-    labelFallback: "Language",
-    keywords: ["locale", "translation", "i18n"],
-  },
   // --- General > Behaviour ---
   {
     section: "general",

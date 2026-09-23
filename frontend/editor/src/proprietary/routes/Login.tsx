@@ -21,7 +21,6 @@ import { useBackendProbe } from "@app/hooks/useBackendProbe";
 import { EDITOR_BASENAME } from "@app/routes/editorBasename";
 import { resolveLandingPath } from "@app/utils/loginLanding";
 import { BASE_PATH, withBasePath } from "@app/constants/app";
-import { updateSupportedLanguages } from "@app/i18n";
 import SpringLoginForm from "@app/auth/ui/SpringLoginForm";
 import AuthDefaultCredentials from "@app/auth/ui/AuthDefaultCredentials";
 import { useSpringLogin } from "@app/auth/ui/useSpringLogin";
@@ -172,10 +171,6 @@ export default function Login() {
       setSsoAutoLogin(Boolean(data.ssoAutoLogin));
       setIsFirstTimeSetup(data.firstTimeSetup ?? false);
       setShowDefaultCredentials(data.showDefaultCredentials ?? false);
-      // Apply language configuration from server
-      if (data.languages || data.defaultLocale) {
-        updateSupportedLanguages(data.languages, data.defaultLocale);
-      }
     },
   });
 

@@ -18,7 +18,6 @@ import { SegmentedControl } from "@app/ui/SegmentedControl";
 import { useTranslation } from "react-i18next";
 import { usePreferences } from "@app/contexts/PreferencesContext";
 import { useAppConfig } from "@app/contexts/AppConfigContext";
-import LanguageSelector from "@app/components/shared/LanguageSelector";
 import type { ToolPanelMode } from "@app/constants/toolPanel";
 import {
   type StartupView,
@@ -472,31 +471,6 @@ const GeneralSection: React.FC<GeneralSectionProps> = ({
           </Stack>
         </Paper>
       )}
-
-      {/* Language */}
-      <Paper withBorder p="md" radius="md">
-        <div
-          id="setting-language"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <Text fw={500} size="sm">
-              {t("settings.general.language", "Language")}{" "}
-              <InfoTooltip
-                label={t(
-                  "settings.general.languageDescription",
-                  "Choose the display language",
-                )}
-              />
-            </Text>
-          </div>
-          <LanguageSelector position="bottom-end" offset={6} />
-        </div>
-      </Paper>
 
       <Paper withBorder p="md" radius="md">
         <Stack gap="md">

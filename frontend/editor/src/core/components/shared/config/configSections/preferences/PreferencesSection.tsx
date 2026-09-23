@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { SettingsCard } from "@app/components/shared/config/SettingsCard";
 import { useAppConfig } from "@app/contexts/AppConfigContext";
 import { AdminSetupBanner } from "@app/components/shared/config/configSections/preferences/AdminSetupBanner";
-import { AppearanceCard } from "@app/components/shared/config/configSections/preferences/AppearanceCard";
 import { EditorDefaultsCard } from "@app/components/shared/config/configSections/preferences/EditorDefaultsCard";
 import { DownloadsCard } from "@app/components/shared/config/configSections/preferences/DownloadsCard";
 import { SoftwareUpdatesCard } from "@app/components/shared/config/configSections/preferences/SoftwareUpdatesCard";
@@ -70,13 +69,6 @@ export default function PreferencesSection({
         {!hideAdminBanner && <AdminSetupBanner />}
 
         {accountSlot}
-
-        <SettingsCard
-          id="appearance"
-          title={t("settings.preferences.appearance", "Appearance")}
-        >
-          <AppearanceCard />
-        </SettingsCard>
 
         <SettingsCard
           id="editorDefaults"

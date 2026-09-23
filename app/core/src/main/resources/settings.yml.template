@@ -169,7 +169,7 @@ legal:
     fallbackText: "" # optional markdown used for any language that has no customFiles/disclaimer/<locale>.md file (also settable via the LEGAL_LOGINAGREEMENT_FALLBACKTEXT env var for single-language headless installs)
 
 system:
-  defaultLocale: "" # force a default language for new users (e.g. 'en-US', 'de-DE'). Empty string auto-detects from the browser, falling back to en-US
+  defaultLocale: "" # server-side locale (e.g. 'en-US'). Empty string means en-US. The web UI is fixed to en-US regardless.
   googlevisibility: false # 'true' serves an allow-all /robots.txt; 'false' serves a disallow-all /robots.txt to keep the instance out of search engines
   enableAlphaFunctionality: false # set to enable functionality which might need more testing before it fully goes live (this feature might make no changes)
   showUpdate: true # see when a new update is available
@@ -314,7 +314,7 @@ autoPipeline:
 
 ui:
   appNameNavbar: "INTEGRA PDF" # custom app/brand name, shown as the browser tab title, beside the logo and as the TOTP/2FA issuer label in authenticator apps. Empty falls back to "INTEGRA PDF" in the UI
-  languages: [] # If empty, all languages are enabled. To restrict to specific languages, use a whitelist like ["de_DE", "pl_PL", "sv_SE"]. Empty list or not restricting any languages will enable all available languages.
+  languages: [] # Ignored by the web UI, which is fixed to en-US.
   defaultHideUnavailableTools: false # Default user preference: hide disabled tools instead of greying them out
   defaultHideUnavailableConversions: false # Default user preference: hide disabled conversion options instead of greying them out
   hideDisabledTools:
